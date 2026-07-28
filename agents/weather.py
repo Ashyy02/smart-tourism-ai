@@ -1,13 +1,13 @@
-class PlannerAgent:
+class WeatherAgent:
 
     def run(self, question):
 
         keywords = [
-            "plan",
-            "trip",
-            "itinerary",
-            "travel plan",
-            "days"
+            "weather",
+            "temperature",
+            "rain",
+            "forecast",
+            "climate"
         ]
 
         question = question.lower()

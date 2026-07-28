@@ -1,13 +1,13 @@
-class PlannerAgent:
+class HotelAgent:
 
     def run(self, question):
 
         keywords = [
-            "plan",
-            "trip",
-            "itinerary",
-            "travel plan",
-            "days"
+            "hotel",
+            "stay",
+            "accommodation",
+            "resort",
+            "guest house"
         ]
 
         question = question.lower()
