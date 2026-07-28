@@ -190,7 +190,8 @@ Streamlit Cloud:
 
 ## 👨‍💻 Author
 
-D.R.A.I.K.Dassanayake
+Name - D.R.A.I.K.Dassanayake
+Index No - ITBIN-2313-0018
 
 Horizon Campus
 
