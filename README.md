@@ -193,6 +193,7 @@ Streamlit Cloud:
 - Weather information is not real-time.
 - Knowledge depends on the tourism dataset.
 - Internet connection is required.
+- AI responses may vary depending on the selected model.
 
 ---
 
