@@ -121,6 +121,8 @@ Router
 - ChromaDB
 - Sentence Transformers
 - Pandas
+- Git
+- GitHub
 
 ---
 
