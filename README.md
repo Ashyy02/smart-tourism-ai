@@ -211,3 +211,11 @@ Streamlit Cloud:
 ## 🙏 Acknowledgements
 
 This project was developed as part of the Intelligent Systems (Agentic AI) module at Horizon Campus.
+
+## 🚀 Future Improvements
+
+- Real-time weather API integration
+- Google Maps integration
+- Voice assistant support
+- Multi-language support
+- Personalized travel recommendations
