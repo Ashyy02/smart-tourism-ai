@@ -198,9 +198,16 @@ Streamlit Cloud:
 
 ## 👨‍💻 Author
 
-Name - D.R.A.I.K.Dassanayake
-Index No - ITBIN-2313-0018
+**Name:** D.R.A.I.K. Dassanayake
 
-Horizon Campus
+**Student ID:** ITBIN-2313-0018
 
-IT41043 – Intelligent Systems (Agentic AI)
+**Institution:** Horizon Campus
+
+**Module:** IT41043 – Intelligent Systems (Agentic AI)
+
+---
+
+## 🙏 Acknowledgements
+
+This project was developed as part of the Intelligent Systems (Agentic AI) module at Horizon Campus.
