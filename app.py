@@ -189,3 +189,20 @@ if st.session_state.history:
         )
 
         st.divider()
+
+        st.markdown(
+    f"<div class='response-box'>{chat['answer']}</div>",
+    unsafe_allow_html=True
+)
+
+st.divider()
+
+# -------------------------
+# Footer
+# -------------------------
+
+st.divider()
+
+st.caption(
+    "Developed by D.R.A.I.K. Dassanayake | Horizon Campus"
+)
