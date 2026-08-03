@@ -167,10 +167,7 @@ GROQ_API_KEY=YOUR_KEY
 
 ## 🌐 Live Demo
 
-Streamlit Cloud:
-
-(https://smart-tourism-ai-ebwmuzgbolgljofjdf5re7.streamlit.app/)
-
+[Open Streamlit App](https://smart-tourism-ai-ebwmuzgbolgljofjdf5re7.streamlit.app/)
 ---
 
 
