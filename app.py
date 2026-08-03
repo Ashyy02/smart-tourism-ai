@@ -73,6 +73,8 @@ with st.sidebar:
 
     st.header("🌍 About")
 
+    st.success("Built using Multi-Agent AI + RAG")
+
     st.write("""
 This AI Assistant can help you with:
 
@@ -110,9 +112,16 @@ if "history" not in st.session_state:
 
 question = st.text_area(
     "💬 Ask anything about Sri Lanka",
-    placeholder="Example: Recommend a hotel in Kandy",
+   placeholder="""Examples:
+
+• Plan a 3-day trip to Ella
+• Recommend budget hotels in Kandy
+• Tell me about Sigiriya
+• What's the weather in Nuwara Eliya?
+""",
     height=120
 )
+
 
 if st.button("🚀 Ask AI", use_container_width=True):
 
