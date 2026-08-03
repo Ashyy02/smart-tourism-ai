@@ -203,6 +203,8 @@ st.divider()
 
 st.divider()
 
+st.caption("Version 1.0")
+
 st.caption(
     "Developed by D.R.A.I.K. Dassanayake | Horizon Campus"
 )
