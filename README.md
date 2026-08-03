@@ -80,7 +80,7 @@ Router
 
 ---
 
-## 🧠 AI Models
+## 🤖 AI Models
 
 | Task | Model |
 |------|-------|
@@ -91,6 +91,14 @@ Router
 
 - Groq provides fast routing decisions.
 - OpenRouter provides higher-quality final responses.
+
+## 📊 Model Comparison
+
+| Sub-task | Model | Provider | Reason |
+|----------|-------|----------|--------|
+| Intent Routing | Llama 3.1 8B | Groq | Very fast and low latency for routing user requests. |
+| Final Response Generation | GPT OSS 120B | OpenRouter | Better reasoning and higher-quality responses for tourism assistance. |
+| Knowledge Retrieval | ChromaDB + Sentence Transformers | Local | Efficient semantic search over tourism knowledge base. |
 
 ---
 
