@@ -1,9 +1,9 @@
 import os
+
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 from rag.rag_loader import RAGLoader
-
 from agents.planner import PlannerAgent
 from agents.hotel import HotelAgent
 from agents.weather import WeatherAgent
@@ -15,12 +15,12 @@ load_dotenv()
 class LLMService:
 
     def __init__(self):
-
         self.llm = ChatOpenAI(
             base_url="https://openrouter.ai/api/v1",
             api_key=os.getenv("OPENROUTER_API_KEY"),
-            model="meta-llama/llama-3.1-8b-instruct",
+            model="google/gemini-2.5-flash",
             temperature=0.3,
+            max_tokens=3000,
         )
 
         self.rag = RAGLoader()
@@ -31,14 +31,29 @@ class LLMService:
         self.weather = WeatherAgent()
         self.knowledge = KnowledgeAgent()
 
+    def prepare_search_question(self, question):
+        # Limited aliases, not a general translation system.
+        replacements = {
+            "ඇල්ලට": "Ella",
+            "ඇල්ල": "Ella",
+            "ගමන් සැලැස්මක්": "travel plan",
+            "ගමන් සැලැස්ම": "travel plan",
+            "கண்டியில்": "Kandy",
+            "ஹோட்டலை": "hotel",
+            "ஹோட்டல்": "hotel",
+        }
+
+        search_question = question
+
+        for original, english in replacements.items():
+            search_question = search_question.replace(original, english)
+
+        return search_question
+
     def ask(self, question):
+        search_question = self.prepare_search_question(question)
 
-        # -------------------------
-        # Agent Selection
-        # -------------------------
-
-        if self.planner.run(question):
-
+        if self.planner.run(search_question):
             category = "Planner Agent"
 
             system_prompt = """
@@ -47,7 +62,6 @@ You are an expert Sri Lanka Travel Planner.
 Create detailed travel itineraries.
 
 Always include:
-
 - Day by Day Plan
 - Attractions
 - Transportation
@@ -58,8 +72,7 @@ Always include:
 Respond professionally.
 """
 
-        elif self.hotel.run(question):
-
+        elif self.hotel.run(search_question):
             category = "Hotel Agent"
 
             system_prompt = """
@@ -68,7 +81,6 @@ You are a Sri Lanka Hotel Expert.
 Recommend hotels based on the user's destination.
 
 Include:
-
 - Best Hotels
 - Budget / Mid-range / Luxury
 - Nearby Attractions
@@ -77,8 +89,7 @@ Include:
 Respond professionally.
 """
 
-        elif self.weather.run(question):
-
+        elif self.weather.run(search_question):
             category = "Weather Agent"
 
             system_prompt = """
@@ -93,14 +104,12 @@ Respond professionally.
 """
 
         else:
-
             category = "Knowledge Agent"
 
             system_prompt = """
 You are a Sri Lanka Tourism Expert.
 
 Answer questions about:
-
 - Tourist Attractions
 - History
 - Culture
@@ -111,12 +120,10 @@ Answer questions about:
 Respond professionally.
 """
 
-        # -------------------------
-        # RAG Search
-        # -------------------------
+        # Retrieve using the normalized question.
+        knowledge = self.rag.search(search_question)
 
-        knowledge = self.rag.search(question)
-
+        # Preserve the original question and its language.
         prompt = f"""
 {system_prompt}
 
@@ -134,6 +141,11 @@ Instructions:
 2. If the knowledge is insufficient, use your own knowledge.
 3. Keep the answer clear and well structured.
 4. Use bullet points where appropriate.
+5. Answer in the same language as the user's original question.
+   If the question is in Sinhala, write the entire answer in clear Sinhala.
+   If the question is in Tamil, write the entire answer in clear Tamil.
+   If the question is in English, write the answer in English.
+   Keep proper place names in English where helpful.
 """
 
         response = self.llm.invoke(prompt)
