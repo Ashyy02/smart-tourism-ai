@@ -20,7 +20,7 @@ class LLMService:
             api_key=os.getenv("OPENROUTER_API_KEY"),
             model="google/gemini-2.5-flash",
             temperature=0.3,
-            max_tokens=3000,
+            max_tokens=1000,
         )
 
         self.rag = RAGLoader()
