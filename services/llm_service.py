@@ -34,6 +34,7 @@ class LLMService:
     def prepare_search_question(self, question):
         # Limited aliases; this is not a general translation system.
         replacements = {
+            # Sinhala place names
             "මහනුවරට": "Kandy",
             "මහනුවර": "Kandy",
             "මිරිස්සේ": "Mirissa",
@@ -49,20 +50,52 @@ class LLMService:
             "යාල": "Yala",
             "දියලුම": "Diyaluma Falls",
             "ඇල්ලට": "Ella",
+            "ඇල්ලේ": "Ella",
             "ඇල්ල": "Ella",
+
+            # Sinhala travel phrases
             "ගමන් සැලැස්මක්": "travel plan",
             "ගමන් සැලැස්ම": "travel plan",
+
+            # Tamil place names
+            "எல்லாவில்": "Ella",
+            "எல்லாவுக்கு": "Ella",
+            "எல்லா": "Ella",
             "கண்டியில்": "Kandy",
             "கண்டிக்கு": "Kandy",
             "கண்டி": "Kandy",
+            "மிரிஸ்ஸாவில்": "Mirissa",
+            "மிரிஸ்ஸா": "Mirissa",
+            "நுவரெலியாவில்": "Nuwara Eliya",
+            "நுவரெலியா": "Nuwara Eliya",
+            "சிகிரியாவில்": "Sigiriya",
+            "சிகிரியா": "Sigiriya",
+            "காலியில்": "Galle",
+            "காலி": "Galle",
+            "கொழும்பிலிருந்து": "Colombo",
+            "கொழும்பு": "Colombo",
+            "உடவளவையை": "Udawalawe",
+            "உடவளவை": "Udawalawe",
+            "யால": "Yala",
+            "தியலும": "Diyaluma Falls",
+
+            # Tamil hotel phrases
             "ஹோட்டலை": "hotel",
             "ஹோட்டல்": "hotel",
         }
 
         search_question = question
 
-        for original, english in replacements.items():
-            search_question = search_question.replace(original, english)
+        # Replace longer aliases first.
+        for original in sorted(
+            replacements,
+            key=len,
+            reverse=True,
+        ):
+            search_question = search_question.replace(
+                original,
+                replacements[original],
+            )
 
         return search_question
 
