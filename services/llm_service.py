@@ -173,8 +173,8 @@ Answer questions about:
 Respond professionally.
 """
 
-        # Baseline evaluation: no retrieved tourism knowledge.
-        knowledge = ""
+        # Retrieve tourism knowledge using the normalized question.
+        knowledge = self.rag.search(search_question)
 
         prompt = f"""
 {system_prompt}
