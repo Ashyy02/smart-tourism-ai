@@ -32,7 +32,7 @@ class LLMService:
         self.knowledge = KnowledgeAgent()
 
     def prepare_search_question(self, question):
-        # Limited aliases; this is not a general translation system.
+        # Unicode escapes preserve Sinhala and Tamil characters.
         replacements = {
             # Sinhala place names
             "\u0db8\u0dc4\u0db1\u0dd4\u0dc0\u0dbb\u0da7": "Kandy",
@@ -86,7 +86,6 @@ class LLMService:
 
         search_question = question
 
-        # Replace longer aliases first.
         for original in sorted(
             replacements,
             key=len,
@@ -174,7 +173,8 @@ Answer questions about:
 Respond professionally.
 """
 
-        knowledge = self.rag.search(search_question)
+        # Baseline evaluation: no retrieved tourism knowledge.
+        knowledge = ""
 
         prompt = f"""
 {system_prompt}
